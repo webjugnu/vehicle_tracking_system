@@ -37,9 +37,10 @@ class _LoginState extends State<Login> {
     String deviceID = await global.getDeviceId();
     List response = await login(mobileNo,deviceID,force);
     if(response[0] == 200 || response[0] == 201){
+      print(response);
       final SharedPreferences prefs = await _prefs;
       prefs.setString("mobile_no", mobileNo);
-      prefs.setString("id", response[2]).then((bool success) async {
+      prefs.setString("id", response[2].toString()).then((bool success) async {
         Navigator.of(context).pushReplacementNamed('/home');
       });
     }else if(response[0] == 501){
